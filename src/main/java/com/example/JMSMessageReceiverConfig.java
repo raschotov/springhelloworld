@@ -6,7 +6,6 @@ import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.jms.annotation.EnableJms;
 import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
-import org.springframework.jms.core.JmsTemplate;
 
 @SpringBootConfiguration
 //@Configuration
@@ -15,9 +14,6 @@ public class JMSMessageReceiverConfig {
 
     @Value("${activemq.broker-url}")
     private String brokerUrl;
-
-    //private String brokerUrl = "localhost"; //need to fix back on .properties parsing
-
 
     @Bean
     public ActiveMQConnectionFactory receiverActiveMQConnectionFactory() {
@@ -43,10 +39,5 @@ public class JMSMessageReceiverConfig {
     @Bean
     public JMSMessageSender sender() {
         return new JMSMessageSender();
-    }
-
-    @Bean
-    public JmsTemplate jmsTemplate() {
-        return new JmsTemplate(receiverActiveMQConnectionFactory());
     }
 }
